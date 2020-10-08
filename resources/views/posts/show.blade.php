@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('content')
 	<div class="container">
 		<div class="row">
@@ -8,9 +7,11 @@
 			  	<div class="card">
 			    	<div class="card-body p-0">
 			    		<div class="row">
+			    			{{-- Image --}}
 			    			<div class="col-md-7 p-0">
 			    				<img src="/storage/{{ $post->photo }}" class="w-100">
 			    			</div>
+			    			{{-- Right Side of the image with details --}}
 			    			<div class="col-md-5 pt-3 pl-0">
 			    				<div class="d-flex align-items-center pl-3">
 			    					<div class="pr-3">
@@ -19,9 +20,12 @@
 			    					<div>
 			    						<a href="/profile/{{ $post->user->id }}" class="font-weight-bold text-dark">{{ $post->user->username }}</a>
 			    					</div>
-			    					@can('update', !$post->user->profile)
-			    						<a href="#" class="font-weight-bold ml-1"><i class="fas fa-circle text-dark" style="font-size: 3px;"></i> Follow</a>
-			    					@endcan
+			    					@auth
+			    						{{-- Show Follow/Unfollow if logged in --}}
+                        				@if($post->user->id != Auth::user()->id)
+			    							<a href="javascript:void(0)" id="followBtn" class="font-weight-bold ml-1" data-user="{{ $post->user->id }}"><i class="fas fa-circle text-dark" style="font-size: 3px;"></i> {!! ($follows) ? 'Unfollow' : 'Follow' !!}</a>
+			    					 	@endif
+                    				@endauth
 			    				</div>
 			    				
 			    				<div class="d-none d-md-block">
@@ -48,6 +52,22 @@
 
 @section('javascript')
 	<script>
-		
+	    $(document).ready(function() {
+	        // Follow - Unfollow Toggle and Action
+	        $("#followBtn").click(function(){
+	            var user = $(this).data("user");
+	            $.ajax(
+	                {
+	                    data: {"_token": "{{ csrf_token() }}"},
+	                    type: "POST",
+	                    url: "/ajax/follow/"+user,
+	                    success: function(response){
+	                        var follows = (response) ? 'Unfollow' : 'Follow';
+	                        $("#followBtn").html(follows);
+	                    }
+	                }
+	            );
+	        }); 
+	    });
 	</script>
 @endsection

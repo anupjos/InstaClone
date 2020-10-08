@@ -58,6 +58,10 @@ class ProfileController extends Controller
     	return redirect('/profile/'. $user->id);
     }
 
+    /**
+     * Follow/Unfollow a user profile.
+     *
+     */
     public function getFollowing(User $user)
     {
         auth()->user()->following()->toggle($user->profile);

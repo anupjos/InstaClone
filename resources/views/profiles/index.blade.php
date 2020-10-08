@@ -3,9 +3,11 @@
 @section('content')
 <div class="container">
     <div class="row mt-5 mb-5">
+        {{-- Profile Pic --}}
         <div class="col-md-3 pr-5">
            <img src="{{ $user->profile->profilePhoto() }}" class="w-100 rounded-circle img-fluid">
         </div>
+        {{-- Bio Div --}}
         <div class="col-md-9">
             <div class="h4"> {{ $user->username }}
                     @can('update', $user->profile)
@@ -31,6 +33,7 @@
         </div>
     </div>
 
+    {{-- All Posts --}}
     <div class="row mb-5">
         @foreach($user->posts as $post)
         <div class="col-md-4 mb-4">
@@ -41,6 +44,7 @@
         @endforeach
     </div>
 
+    {{-- Footer with Create Post Button --}}
     <div class="footer">
         @can('update', $user->profile)
             <a href="/p/create" style="font-size: 30px;"><i class="far fa-plus-square text-dark"></i></a>
@@ -53,6 +57,7 @@
 @section('javascript')
 <script>
     $(document).ready(function() {
+        // Follow - Unfollow Toggle and Action
         $("#followBtn").click(function(){
             var user = $(this).data("user");
             $.ajax(

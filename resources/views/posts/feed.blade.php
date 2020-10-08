@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('content')
 	<div class="container">
 		@foreach($posts as $post)
@@ -10,6 +9,7 @@
 				    	<div class="card-body">
 				    		<div class="row">
 				    			<div class="col">
+				    				{{-- Header with profile pic and username --}}
 				    				<div class="d-flex align-items-center">
 				    					<div class="pr-3">
 				    						<img src="{{ $post->user->profile->profilePhoto() }}" class="w-100 rounded-circle" style="max-width: 35px;">
@@ -19,6 +19,7 @@
 				    					</div>
 				    				</div>
 				    				<hr>
+				    				{{-- Image --}}
 				    				<img src="/storage/{{ $post->photo }}" class="w-100">
 				    				<div class="d-none d-md-block">
 				    					<hr>
@@ -26,6 +27,7 @@
 					    					<div class="font-weight-bold">
 					    						<a href="/profile/{{ $post->user->id }}" class="text-dark mr-1">{{ $post->user->username }}</a>
 					    					</div> 
+					    					{{-- Caption of the Image --}}
 					    					<div>{{ $post->caption }}</div>
 					    				</div>
 				    				</div>
