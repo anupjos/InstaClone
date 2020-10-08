@@ -16,7 +16,8 @@
 						</ul>
 					</div>
 					<div class="col-md-8 mt-3 ml-5">
-						<div class="tab-content" id="myTabContent">
+						<div class="tab-content">
+							{{-- Edit Profile Tab Content --}}
 				            <div class="tab-pane fade show active" id="edit" role="tabpanel" aria-labelledby="edit-tab">
 				            	<form action="/profile/{{ $user->id }}/edit" enctype="multipart/form-data" method="post">
 								@csrf
@@ -113,6 +114,7 @@
 					                </div>
 				            	</form>
 				            </div>
+				            {{-- Emails From Instagram Tab Content --}}
 				            <div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
 				            	<h5>Emails From Instagram</h5>
 				            	<p>This is a list of emails Instagram has sent you about security and login in the last 14 days. You can use it to verify which emails are real and which are fake.</p>

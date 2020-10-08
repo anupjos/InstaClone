@@ -70,6 +70,7 @@ class PostController extends Controller
     public function getPost($postId)
     {
     	$post = Post::findorFail($postId);
-    	return view('posts.show', compact('post'));
+        $follows = (auth()->user()) ? auth()->user()->following->contains($post->user_id) : false;
+    	return view('posts.show', compact('post','follows'));
     }
 }
