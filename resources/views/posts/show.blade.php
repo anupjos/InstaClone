@@ -30,9 +30,9 @@
 			    				
 			    				<div class="d-none d-md-block">
 			    					<hr>
-				    				<div class="d-flex align-items-center pl-3">
+				    				<div class="d-flex pl-3">
 				    					<div class="pr-3">
-				    						<img src="{{ $post->user->profile->profilePhoto() }}" class="w-100 rounded-circle" style="max-width: 35px;">
+				    						<img src="{{ $post->user->profile->profilePhoto() }}" class="rounded-circle" style="max-width: 35px;">
 				    					</div>
 				    					<div>
 				    						<a href="/profile/{{ $post->user->id }}" class="text-dark font-weight-bold mr-1">{{ $post->user->username }}</a>
